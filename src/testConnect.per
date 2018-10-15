@@ -1,0 +1,72 @@
+
+ACTION DEFAULTS
+	ACTION exit (TEXT="Exit", IMAGE="fa-power-off")
+END -- AD
+
+LAYOUT (TEXT="HMRC Test Program", STYLE="special")
+VBOX
+HBOX (SPLITTER)
+GRID
+{
+[l001         |f001                                                  ]
+[l002         |f002                                                  ]
+[l003         |f003                                                  ]
+[l004         |f004                                                  ]
+              [                                                      ]
+[l005         |f005                                                  ]
+              [                                                      ]
+              [                                                      ]
+<t headers                                                           >
+ [c|t001             |t002                                          ]
+ [c|t001             |t002                                          ]
+ [c|t001             |t002                                          ]
+ [c|t001             |t002                                          ]
+<                                                                    >
+}
+END -- GRID
+GRID
+{
+[txt                                                                 ]
+[                                                                    ]
+[                                                                    ]
+[                                                                    ]
+[                                                                    ]
+[                                                                    ]
+[                                                                    ]
+[                                                                    ]
+[                                                                    ]
+[                                                                    ]
+}
+END -- GRID
+END -- HBOX
+GRID
+{
+Reply:
+[reply                                                               ]
+[                                                                    ]
+}
+END -- GRID
+END -- VBOX
+
+ATTRIBUTES
+LABEL l001 : l001, TEXT="URL:", JUSTIFY=RIGHT;
+LABEL l002 : l002, TEXT="Headers:", JUSTIFY=RIGHT;
+LABEL l003 : l003, TEXT="Date:", JUSTIFY=RIGHT;
+LABEL l004 : l004, TEXT="KeyID:", JUSTIFY=RIGHT;
+LABEL l005 : l005, TEXT="To Sign:", JUSTIFY=RIGHT;
+
+f001 = FORMONLY.l_url;
+f002 = FORMONLY.l_headers;
+f003 = FORMONLY.l_date;
+TEXTEDIT f004 = FORMONLY.l_keyId, STRETCH=BOTH, SCROLLBARS=BOTH;
+TEXTEDIT f005 = FORMONLY.l_signed, STRETCH=BOTH, SCROLLBARS=BOTH;
+CHECKBOX c = FORMONLY.l_addToSig, VALUECHECKED=1, VALUEUNCHECKED=0;
+
+TEXTEDIT txt = FORMONLY.m_txt, STRETCH=BOTH, SCROLLBARS=BOTH, FONTPITCH=FIXED;
+TEXTEDIT reply = FORMONLY.l_reply, STRETCH=BOTH, SCROLLBARS=BOTH, FONTPITCH=FIXED;
+
+t001 = FORMONLY.key, TITLE="Header";
+t002 = FORMONLY.val, TITLE="Value";
+
+INSTRUCTIONS
+SCREEN RECORD scr_arr ( FORMONLY.key, FORMONLY.val, FORMONLY.l_addToSig )
