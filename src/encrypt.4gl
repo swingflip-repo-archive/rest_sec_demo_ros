@@ -1,5 +1,9 @@
 IMPORT security
 IMPORT os
+IMPORT xml
+
+CONSTANT C_KEY_ALG = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"
+--CONSTANT C_KEY_ALG = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"
 
 --------------------------------------------------------------------------------
 -- Sign a STRING with a private key file
@@ -12,7 +16,7 @@ FUNCTION withKeyFile( l_str STRING, l_keyFile STRING ) RETURNS STRING
 	DEFINE l_text TEXT
 
 -- Save the 'l_str' to encrypt to a temporary .txt file
-	LET l_textFile = fgl_getPID()||".txt"
+	LET l_textFile = fgl_getPID()||".str"
 	LOCATE l_text IN FILE l_textFile
 	LET l_text = l_str
 
@@ -39,3 +43,26 @@ FUNCTION withKeyFile( l_str STRING, l_keyFile STRING ) RETURNS STRING
 	RETURN l_result
 END FUNCTION
 --------------------------------------------------------------------------------
+-- Unfortunately we don't support SHA512 yet!
+--
+-- @param l_keyFile Private key to use for encryption
+-- @param l_str String to encrypt
+-- @returns string of the base64 encoded version of the encrypted data
+FUNCTION glsec_encryptWithKeyFile( l_str STRING, l_keyFile STRING ) RETURNS STRING
+	DEFINE l_ret STRING
+	DEFINE l_key xml.CryptoKey
+
+	IF NOT os.path.exists( l_keyFile ) THEN
+		RETURN SFMT(%"ERROR: Key File '%1' doesn't Exist!", l_keyFile )
+	END IF
+
+	TRY
+		LET l_key = xml.CryptoKey.Create(C_KEY_ALG)
+	CATCH
+		RETURN SFMT(%"ERROR: %1 : %2",STATUS,ERR_GET(STATUS))
+	END TRY
+	CALL l_key.loadPEM( l_keyFile )
+	LET l_ret = xml.Signature.signString(l_key,l_str)
+
+	RETURN l_ret
+END FUNCTION
