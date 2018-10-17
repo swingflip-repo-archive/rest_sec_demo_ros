@@ -1,6 +1,6 @@
 
-HelloWorld.class : HelloWorld.java
+CalcSha512digest.class : CalcSha512digest.java
 	javac $^
 
-run: HelloWorld.class
-	java HelloWorld
+run: CalcSha512digest.class
+	java CalcSha512digest test.txt SHA-512

@@ -1,51 +1,24 @@
 IMPORT util
-IMPORT FGL compute_digest
+IMPORT FGL compute_digest_test
 MAIN
 	DEFINE l_str, l_ret STRING
 	LET l_str = "employeeIDs=7000043NA-12&employeeIDs=7009397BA-1&employeeIDs=7013003WA-10"
-	LET l_str = '{
-    "payslips": [{
-        "lineItemID": "E1-v1",
-        "employeeID": {
-            "employeePpsn": "00000008P",
-            "employmentID": "1"
-        },
-        "name": {
-            "firstName": "Ann",
-            "familyName": "Doe"
-        },
-        "payFrequency": "WEEKLY",
-        "rpnNumber": "5",
-        "taxCredits": 63.46,
-        "taxRates": [{
-            "index": 1,
-            "rateCutOff": 650
-        }],
-        "calculationBasis": "CUMULATIVE",
-        "payDate": "2019-02-01",
-        "grossPay": 307.50,
-        "payForIncomeTax": 307.50,
-        "incomeTaxPaid": 0,
-        "payForEmployeePRSI": 307.50,
-        "payForEmployerPRSI": 307.50,
-        "prsiExempt": false,
-        "prsiClassDetails": [{
-            "prsiClass": "A0",
-            "insurableWeeks": 5
-        }],
-        "employeePRSIPaid": 0,
-        "employerPRSIPaid": 33.06,
-        "payForUSC": 307.50,
-        "uscStatus": "ORDINARY",
-        "uscPaid": 3.07,
-        "lptDeducted": 3.67
-    }]
-}'
-	LET l_str = util.JSON.format( l_str )
-	DISPLAY ""
-	LET l_ret = compute_digest.ComputeHash( l_str, "sha512" )
-	DISPLAY l_ret,"  ( ",l_ret.getLength()," )"
-	DISPLAY ""
-	LET l_ret = compute_digest.ComputeHash_openssl( l_str, "sha512" )
-	DISPLAY l_ret,"  ( ",l_ret.getLength()," )"
+
+	LET l_str = '{"requestId":"1C1F2290-4EDD-4B2C-AAEC-98053568F607","newEmployeeDetails":[{"employeeID":{"employeePpsn":"123","employeeID":"1"},"name":{"firstName":"Neil","familyName":"Martin"},"employmentStartDate":"2018-10-17"}]}'
+--	LET l_str = util.JSON.format( l_str )
+	DISPLAY "\nGenero:"
+	LET l_ret = compute_digest_test.ComputeHash( l_str, "sha512" )
+	DISPLAY l_ret," ( ",l_ret.getLength() USING "##&"," )"
+	DISPLAY "\nopenssl"
+	LET l_ret = compute_digest_test.ComputeHash_openssl( l_str, "sha512" )
+	DISPLAY l_ret," ( ",l_ret.getLength() USING "##&"," )"
+	DISPLAY "\nJava"
+	LET l_ret = compute_digest_test.ComputeHash_java( l_str, "sha-512" )
+	DISPLAY l_ret," ( ",l_ret.getLength() USING "##&"," )"
+	DISPLAY "\nGenero+Java"
+	LET l_ret = compute_digest_test.ComputeHash_javaInterface( l_str, "sha-512" )
+	DISPLAY l_ret," ( ",l_ret.getLength() USING "##&"," )"
+	DISPLAY "\nGenero+Java 2"
+	LET l_ret = compute_digest_test.ComputeHash_javaInterface2( l_str, "sha-512" )
+	DISPLAY l_ret," ( ",l_ret.getLength() USING "##&"," )"
 END MAIN

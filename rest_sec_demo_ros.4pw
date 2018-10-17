@@ -64,6 +64,9 @@
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
   <Group label="Demo" language="Genero">
+    <Library binaryName="CalcSha512digest" id="1615351920" label="CalcSha512digest" language="Java">
+      <File filePath="java/CalcSha512digest.java"/>
+    </Library>
     <Library binaryName="lib" id="216528155" label="lib">
       <File filePath="src/compute_digest.4gl"/>
       <File filePath="etc/default.4st"/>
@@ -75,7 +78,8 @@
     <Application binaryName="md5_password" commandLineArguments="Password123" dependencies="14000,1986,216528155" id="18736" label="md5_password">
       <File filePath="src/md5_password.4gl"/>
     </Application>
-    <Application binaryName="sha512_test" dependencies="216528155" id="1145394152" label="sha512_test">
+    <Application binaryName="sha512_test" dependencies="1615351920" environment="value:CLASSPATH=../bin" id="1145394152" label="sha512_test">
+      <File filePath="src/compute_digest_test.4gl"/>
       <File filePath="src/sha512_test.4gl"/>
     </Application>
     <Application binaryName="testConnect" dependencies="216528155" id="-1414330036" label="testConnect">
