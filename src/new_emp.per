@@ -1,0 +1,18 @@
+
+LAYOUT ( TEXT="New Employee", STYLE="dialog" )
+GRID
+{
+EmployeeID          [f001                    ]
+EmployeePpsn        [f002                    ]
+FirstName           [f003                    ]
+FamilyName          [f004                    ]
+EmploymentStartDate [f005       ]
+}
+END -- GRID
+
+ATTRIBUTES
+f001 = FORMONLY.employeeID;
+f002 = FORMONLY.employeePpsn;
+f003 = FORMONLY.firstName;
+f004 = FORMONLY.familyName;
+DATEEDIT f005 = FORMONLY.employmentStartDate;

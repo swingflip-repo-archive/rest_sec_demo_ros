@@ -31,7 +31,7 @@ FUNCTION withKeyFile( l_str STRING, l_keyFile STRING ) RETURNS STRING
 
 -- Return the base64 version of the encrypted file
 	LET l_result = security.Base64.FromByte(l_data)
-
+{
 -- Do the clean up of temp files
 	IF NOT os.path.delete( l_textFile ) THEN
 		DISPLAY SFMT( "Failed to delete %1 %2!",l_textFile, ERR_GET(STATUS) )
@@ -39,7 +39,7 @@ FUNCTION withKeyFile( l_str STRING, l_keyFile STRING ) RETURNS STRING
 	IF NOT os.path.delete( l_signedFile ) THEN
 		DISPLAY SFMT( "Failed to delete %1 %2!",l_textFile, ERR_GET(STATUS) )
 	END IF
-
+}
 	RETURN l_result
 END FUNCTION
 --------------------------------------------------------------------------------

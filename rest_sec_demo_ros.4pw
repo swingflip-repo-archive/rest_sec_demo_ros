@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Project defaultApplication="-1414330036" gstVersion="30a09" version="3.2">
+<Project defaultApplication="1145394152" gstVersion="30a09" version="3.2">
   <Settings>
     <DynamicProperties version="2">
       <DynamicProperty description="Accent color (Android 5.0 and later)" initialValue="#9575CD" isDefaultInherited="false" isHidden="false" label="Accent color" name="gma-accent-color" readOnly="false" type="COLOR"/>
@@ -75,7 +75,11 @@
     <Application binaryName="md5_password" commandLineArguments="Password123" dependencies="14000,1986,216528155" id="18736" label="md5_password">
       <File filePath="src/md5_password.4gl"/>
     </Application>
+    <Application binaryName="sha512_test" dependencies="216528155" id="1145394152" label="sha512_test">
+      <File filePath="src/sha512_test.4gl"/>
+    </Application>
     <Application binaryName="testConnect" dependencies="216528155" id="-1414330036" label="testConnect">
+      <File filePath="src/new_emp.per"/>
       <File filePath="src/testConnect.4gl"/>
       <File filePath="src/testConnect.per"/>
     </Application>
