@@ -64,9 +64,11 @@
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
   <Group label="Demo" language="Genero">
+    <Library binaryName="etc" id="2054857650" label="etc">
+      <File filePath="etc/default.4st"/>
+    </Library>
     <Library binaryName="lib" id="216528155" label="lib">
       <File filePath="src/compute_digest.4gl"/>
-      <File filePath="etc/default.4st"/>
       <File filePath="src/encrypt.4gl"/>
       <File filePath="src/generateSignature.4gl"/>
       <File filePath="src/getBase64Cert.4gl"/>
@@ -81,22 +83,24 @@
       <File filePath="src/testConnect.per"/>
     </Application>
   </Group>
-  <Group environment="value:CLASSPATH=../sha512test_bin" label="sha512Test" language="Genero" targetDirectory="$(ProjectDir)/sha512test_bin">
+  <Group environment="value:CLASSPATH=../sha512test_bin" label="sha512test" language="Genero" targetDirectory="$(ProjectDir)/sha512test_bin">
     <Library binaryName="CalcSha512digest" id="1615351920" label="CalcSha512digest" language="Java">
       <File filePath="java/CalcSha512digest.java"/>
     </Library>
     <Library binaryName="gas" id="-1261896644" label="gas">
       <File filePath="gas/sha512test.xcf"/>
     </Library>
-    <Application binaryName="sha512_test" dependencies="1615351920" id="1145394152" label="sha512_test">
+    <Application binaryName="sha512_test" dependencies="1615351920,2054857650" id="1145394152" label="sha512_test">
       <File filePath="src/compute_digest_test.4gl"/>
+      <File filePath="src/compute_digest_test_java.4gl"/>
       <File filePath="src/payload.per"/>
       <File filePath="src/sha512_test.4gl"/>
     </Application>
-    <Package binaryName="sha512Test" dependencies="-1261896644,1615351920,1145394152" label="sha512Test" platform="Genero Application Server">
+    <Package binaryName="sha512test" dependencies="-1261896644,1615351920,1145394152,2054857650" label="sha512test" platform="Genero Application Server">
       <DynamicProperty name="packageId" value="sha512test"/>
       <DynamicProperty name="packageLabel" value="sha512test"/>
-      <Directory label="bin" sourceDirectory="$(ProjectDir)/sha512test_bin"/>
+      <Directory includedFiles="*.42?,*.class" label="bin" sourceDirectory="$(ProjectDir)/sha512test_bin"/>
+      <Directory includedFiles="*.4st" label="etc" sourceDirectory="$(ProjectDir)/etc"/>
       <Directory includedFiles="sha512test.xcf" label="gas" sourceDirectory="$(ProjectDir)/gas"/>
     </Package>
   </Group>

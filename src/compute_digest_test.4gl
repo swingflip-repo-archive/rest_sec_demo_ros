@@ -1,7 +1,6 @@
 
 IMPORT security
 IMPORT os
-IMPORT JAVA CalcSha512digest
 --------------------------------------------------------------------------------
 -- Return an base64 encoded version of the hashed string 
 -- @param l_str String to hah
@@ -43,6 +42,10 @@ FUNCTION ComputeHash_openssl(l_str STRING, l_algo STRING) RETURNS STRING
 	DISPLAY "CMD: ",l_cmd
 	RUN l_cmd
 
+	IF NOT os.path.exists(l_signedFile) THEN
+		RETURN "Failed to create .tmp file! check permissions!"
+	END IF
+
 -- Return the base64 version of the encrypted file
 	LET l_result = security.Base64.LoadBinary(l_signedFile) -- .FromByte(l_data)
 {
@@ -54,19 +57,5 @@ FUNCTION ComputeHash_openssl(l_str STRING, l_algo STRING) RETURNS STRING
 		DISPLAY SFMT( "Failed to delete %1 %2!",l_textFile, ERR_GET(STATUS) )
 	END IF
 }
-	RETURN l_result
-END FUNCTION
---------------------------------------------------------------------------------
--- Return an base64 encoded version of the hashed string 
--- @param l_str String to hah
--- @param l_algo Algorithm to use, eg: MD5, sha512
--- @return result or NULL
-FUNCTION ComputeHash_javaInterface(l_str STRING, l_algo STRING) RETURNS STRING
-	DEFINE l_result STRING
-	DEFINE l_CalcSha512digest CalcSha512digest
-
-	LET l_calcSha512digest = CalcSha512digest.create()
-	LET l_result = l_CalcSha512digest.calculateAndEncodeElementDigestString( l_str, l_algo )
-
 	RETURN l_result
 END FUNCTION
