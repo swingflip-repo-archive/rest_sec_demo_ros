@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Project defaultApplication="1145394152" gstVersion="30a09" version="3.2">
+<Project defaultApplication="1145394152" gstVersion="30a0a" version="3.2">
   <Settings>
     <DynamicProperties version="2">
       <DynamicProperty description="Accent color (Android 5.0 and later)" initialValue="#9575CD" isDefaultInherited="false" isHidden="false" label="Accent color" name="gma-accent-color" readOnly="false" type="COLOR"/>
@@ -8,8 +8,8 @@
       <DynamicProperty description="Navigation bar background color (Android 5.0 and later)" initialValue="#5E35B1" isDefaultInherited="false" isHidden="false" label="Navigation bar background color" name="gma-navigationBarBackground-color" readOnly="false" type="COLOR"/>
       <DynamicProperty description="Primary color (Android 5.0 and later)" initialValue="#5E35B1" isDefaultInherited="false" isHidden="false" label="Primary color" name="gma-primary-color" readOnly="false" type="COLOR"/>
       <DynamicProperty description="Primary dark color (Android 5.0 and later)" initialValue="#5E35B1" isDefaultInherited="false" isHidden="false" label="Primary dark color" name="gma-primary-dark-color" readOnly="false" type="COLOR"/>
-      <DynamicProperty description="Primary text color (Android 5.0 and later)" initialValue="#80000000" isDefaultInherited="false" isHidden="false" label="Primary text color" name="gma-primaryText-color" readOnly="false" type="COLOR"/>
-      <DynamicProperty description="Window backround color (Android 5.0 and later)" initialValue="#ffffffff" isDefaultInherited="false" isHidden="false" label="Window background color" name="gma-windowBackground-color" readOnly="false" type="COLOR"/>
+      <DynamicProperty description="Primary text color (Android 5.0 and later)" initialValue="#000000" isDefaultInherited="false" isHidden="false" label="Primary text color" name="gma-primaryText-color" readOnly="false" type="COLOR"/>
+      <DynamicProperty description="Window backround color (Android 5.0 and later)" initialValue="#ffffff" isDefaultInherited="false" isHidden="false" label="Window background color" name="gma-windowBackground-color" readOnly="false" type="COLOR"/>
       <DynamicProperty description="Cordova plugins" editorInfo="isDynamic:true;title:Cordova;description:Cordova plugins;icon:checkbox_checked" initialValue="" isDefaultInherited="false" isHidden="false" label="Cordova Plugins" name="gmi-cordova" readOnly="false" type="MULTIPLEBOOLEAN"/>
       <DynamicProperty description="High-DPI Icon (72x72 px) path" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Icon-hdpi (72x72 px)" name="icon-hdpi" readOnly="false" type="FILE"/>
       <DynamicProperty description="Low-DPI Icon (36x36 px) path" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Icon-ldpi (36x36 px)" name="icon-ldpi" readOnly="false" type="FILE"/>
@@ -64,9 +64,6 @@
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
   <Group label="Demo" language="Genero">
-    <Library binaryName="CalcSha512digest" id="1615351920" label="CalcSha512digest" language="Java">
-      <File filePath="java/CalcSha512digest.java"/>
-    </Library>
     <Library binaryName="lib" id="216528155" label="lib">
       <File filePath="src/compute_digest.4gl"/>
       <File filePath="etc/default.4st"/>
@@ -78,14 +75,29 @@
     <Application binaryName="md5_password" commandLineArguments="Password123" dependencies="14000,1986,216528155" id="18736" label="md5_password">
       <File filePath="src/md5_password.4gl"/>
     </Application>
-    <Application binaryName="sha512_test" dependencies="1615351920" environment="value:CLASSPATH=../bin" id="1145394152" label="sha512_test">
-      <File filePath="src/compute_digest_test.4gl"/>
-      <File filePath="src/sha512_test.4gl"/>
-    </Application>
     <Application binaryName="testConnect" dependencies="216528155" id="-1414330036" label="testConnect">
       <File filePath="src/new_emp.per"/>
       <File filePath="src/testConnect.4gl"/>
       <File filePath="src/testConnect.per"/>
     </Application>
+  </Group>
+  <Group environment="value:CLASSPATH=../sha512test_bin" label="sha512Test" language="Genero" targetDirectory="$(ProjectDir)/sha512test_bin">
+    <Library binaryName="CalcSha512digest" id="1615351920" label="CalcSha512digest" language="Java">
+      <File filePath="java/CalcSha512digest.java"/>
+    </Library>
+    <Library binaryName="gas" id="-1261896644" label="gas">
+      <File filePath="gas/sha512test.xcf"/>
+    </Library>
+    <Application binaryName="sha512_test" dependencies="1615351920" id="1145394152" label="sha512_test">
+      <File filePath="src/compute_digest_test.4gl"/>
+      <File filePath="src/payload.per"/>
+      <File filePath="src/sha512_test.4gl"/>
+    </Application>
+    <Package binaryName="sha512Test" dependencies="-1261896644,1615351920,1145394152" label="sha512Test" platform="Genero Application Server">
+      <DynamicProperty name="packageId" value="sha512test"/>
+      <DynamicProperty name="packageLabel" value="sha512test"/>
+      <Directory label="bin" sourceDirectory="$(ProjectDir)/sha512test_bin"/>
+      <Directory includedFiles="sha512test.xcf" label="gas" sourceDirectory="$(ProjectDir)/gas"/>
+    </Package>
   </Group>
 </Project>

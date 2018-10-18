@@ -1,0 +1,47 @@
+
+ACTION DEFAULTS
+	ACTION exit (TEXT="Exit", IMAGE="fa-power-off")
+	ACTION ex1 (TEXT="Example 1", IMAGE="fa-circle-o")
+	ACTION ex2 (TEXT="Example 2", IMAGE="fa-circle-o")
+	ACTION clear (TEXT="Clear", IMAGE="fa-refresh")
+	ACTION format_json (TEXT="Format JSON", IMAGE="fa-heart")
+	ACTION downshift (TEXT="Downshift", IMAGE="fa-chevron-down")
+	ACTION calculate (TEXT="Calculate", IMAGE="fa-cog")
+END -- AD
+
+
+LAYOUT (TEXT="Digest Calculator")
+GRID
+{
+<G "Payload"                                                                      >
+ [f001                                                                           ]
+ [                                                                               ]
+ [                                                                               ]
+ [                                                                               ]
+ [                                                                               ]
+ [                                                                               ]
+ [                                                                               ]
+ [                                                                               ]
+ [                                                                               ]
+ [                                                                               ]
+<                                                                                 >
+<G "Expect"                                                                       >
+ [f002                                                                           ]
+<                                                                                 >
+<G "Results"                                                                      >
+ Genero:
+ [f003                                                                           ]
+ OpenSSL:
+ [f004                                                                           ]
+ Java:
+ [f005                                                                           ]
+<                                                                                 >
+}
+END -- GRID
+
+ATTRIBUTES
+TEXTEDIT f001 = FORMONLY.m_payload, STRETCH=BOTH, SCROLLBARS=BOTH;
+TEXTEDIT f002 = FORMONLY.m_expect, SCROLLBARS=HORIZONTAL, STRETCH=X, NOENTRY;
+TEXTEDIT f003 = FORMONLY.m_genero, SCROLLBARS=HORIZONTAL, STRETCH=X, NOENTRY;
+TEXTEDIT f004 = FORMONLY.m_openssl, SCROLLBARS=HORIZONTAL, STRETCH=X, NOENTRY;
+TEXTEDIT f005 = FORMONLY.m_java, SCROLLBARS=HORIZONTAL, STRETCH=X, NOENTRY;

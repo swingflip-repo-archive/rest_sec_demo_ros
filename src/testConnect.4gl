@@ -301,7 +301,7 @@ FUNCTION add_emp()
 	IF int_flag THEN RETURN END IF
 
 	LET l_payload = util.JSON.stringify( dummy )
-	DISPLAY l_payload
+	DISPLAY "Payload: ",l_payload
 
 	LET l_reqTarget = SFMT("paye-employers/v1/rest/rpn/%1/%2?softwareUsed=%3&softwareVersion=%4", m_empRegNo, m_taxYear, C_SOFTWARE, C_SOFTWAREVER )
 	CALL test1( l_reqTarget, l_payload ) RETURNING l_stat, l_reply
