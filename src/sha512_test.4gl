@@ -8,6 +8,10 @@ CONSTANT C_EXP1 = "KdQDkUyVUpSURIIoV9BhsW883Lq8rzMMdQtPYVK1jfXt83PCkwS0Sf1ti2NJQ
 
 CONSTANT C_EX2 = '{ "payslips": [{ "lineItemID": "E1-v1", "employeeID": { "employeePpsn": "00000008P", "employmentID": "1" }, "name": { "firstName": "Ann", "familyName": "Doe" }, "payFrequency": "WEEKLY", "rpnNumber": "5", "taxCredits": 63.46, "taxRates": [{ "index": 1, "rateCutOff": 650 }], "calculationBasis": "CUMULATIVE", "payDate": "2019-02-01", "grossPay": 307.50, "payForIncomeTax": 307.50, "incomeTaxPaid": 0, "payForEmployeePRSI": 307.50, "payForEmployerPRSI": 307.50, "prsiExempt": false, "prsiClassDetails": [{ "prsiClass": "A0", "insurableWeeks": 5 }], "employeePRSIPaid": 0, "employerPRSIPaid": 33.06, "payForUSC": 307.50, "uscStatus": "ORDINARY", "uscPaid": 3.07, "lptDeducted": 3.67 }] }'
 CONSTANT C_EXP2 = "b1RH7nPCJqiykwDrLSZzG3rKWlwSHhrE4MJdanUYR7IJAG8m4ML5P4TOql6zPObL/+q0rHQVhqLPV67m82pJvQ=="
+
+CONSTANT C_EX3 = "employeeIDs=08000264IH-20004449"
+CONSTANT C_EXP3 = "Jx88x9hkpnN2FbyKfZzC0F/cbm+VGDuKi0I2KunVhuwzud60+1qSFC3ovHVAYd+LpBdpjIv5AbBiihfwmsfqSQ=="
+
 DEFINE m_payload, m_expect, m_genero, m_openssl, m_java STRING
 DEFINE m_gotJava BOOLEAN
 MAIN
@@ -31,6 +35,11 @@ MAIN
 		ON ACTION ex2
 			LET m_payload = C_EX2
 			LET m_expect = C_EXP2
+			CALL calculate()
+
+		ON ACTION ex3
+			LET m_payload = C_EX3
+			LET m_expect = C_EXP3
 			CALL calculate()
 
 		ON ACTION clear

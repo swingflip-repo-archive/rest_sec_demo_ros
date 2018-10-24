@@ -12,8 +12,11 @@ FUNCTION ComputeHash(l_str STRING, l_algo STRING) RETURNS STRING
 
 	TRY
 		LET l_dgst = security.Digest.CreateDigest( l_algo.toUpperCase() )
+    DISPLAY "TEST:" || l_dgst
 		CALL l_dgst.AddStringData( l_str )
+    DISPLAY "TEST2:" || l_dgst
 		LET l_result = l_dgst.DoBase64Digest()
+    DISPLAY "TEST3:" || l_result
 		--DISPLAY "Hex: ",l_dgst.DoHexBinaryDigest()," Base64 of Hex: ", security.Base64.FromString(l_dgst.DoHexBinaryDigest() )
 	CATCH
 		DISPLAY "ERROR : ", STATUS, " - ", SQLCA.SQLERRM
